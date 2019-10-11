@@ -15,8 +15,12 @@ pipeline {
         }
         stage('Test') {
             steps {
-		bat 'C:\\maven-3.6.2\\bin\\mvn test'
-                //sh 'mvn test'
+                try {
+                    bat 'C:\\maven-3.6.2\\bin\\mvn test'
+                    //sh 'mvn test'
+                } catch (Exception e) {
+                    bat 'Ha fallado el test unitario!'
+                }
             }
             post {
                 always {
